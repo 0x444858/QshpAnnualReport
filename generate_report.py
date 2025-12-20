@@ -252,6 +252,8 @@ def main():
     report['summary']['post_count_per_day'] = get_yearly_post_counts(db_conn, config.year)
     # 发帖天数
     report['summary']['post_days'] = len(report['summary']['post_count_per_day'])
+    # 添加年
+    report['year'] = config.year
 
     # 写入文件
     with open(f'data/user/{uid}/report.json', 'w', encoding='utf-8') as f:
