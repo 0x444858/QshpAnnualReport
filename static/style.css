@@ -1,3 +1,32 @@
 #root {
     text-align: center;
+    background-color: #71abff;
+}
+
+img {
+    max-width: 100%;
+}
+
+.input_common {
+    background-color: #f2ffff;
+    height: 40px;
+    width: 420px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 50px;
+}
+
+.button_common {
+    background-color: #2174f1;
+    height: 50px;
+    width: 420px;
+    text-align: center;
+    line-height: 100%;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 50px;
+    color: white;
 }

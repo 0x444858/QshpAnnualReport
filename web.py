@@ -15,8 +15,13 @@ def index():
     return app.send_static_file('index.html')
 
 
-@app.route('/AnnualReport/api/user_status')
+@app.route('/AnnualReport/user_status')
 def user_status():
+    return app.send_static_file('user_status.html')
+
+
+@app.route('/AnnualReport/api/user_status')
+def user_status_api():
     uid = request.args.get('uid')
 
     if not uid:
@@ -114,7 +119,7 @@ def user_status():
 
 
 @app.route('/AnnualReport/api/get_report')
-def get_report():
+def get_report_api():
     uid = request.args.get('uid')
 
     if not uid:
@@ -155,7 +160,7 @@ def get_report():
 
 
 @app.route('/AnnualReport/api/new_task', methods=['POST'])
-def new_task():
+def new_task_api():
     # 1. 检查请求是否为 JSON
     if not request.is_json:
         return jsonify({

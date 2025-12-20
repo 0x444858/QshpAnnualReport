@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>清水河畔2025年度报告</title>
-    <link rel="stylesheet" href="AnnualReport/static/style.css">
+    <link rel="stylesheet" href="/AnnualReport/static/style.css">
+    <link rel="stylesheet" href="/AnnualReport/static/mobile.css" media="(max-width: 599px)">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 </head>
 <body>
 <div id="root">
-
+    <div id="logo_div">
+        <img src="/AnnualReport/static/logo-big.png" style="margin: 40px auto" alt="logo">
+    </div>
+    <div id="main_div">
+        <h1>获取您的清水河畔2025年度报告</h1>
+        <input name="=uid" id="uid_input" class="input_common" placeholder="输入您的UID" type="number" min="1">
+        <br>
+        <button id="submit_button" class="button_common" onclick="submit()">确定</button>
+    </div>
 </div>
+<script>
+function submit() {
+    let uid = document.getElementById("uid_input").value;
+    if (uid === "") {
+        alert("请输入您的UID");
+        return;
+    }
+    if (isNaN(uid)) {
+        alert("UID必须为数字");
+        return;
+    }
+    window.location.href = "/AnnualReport/user_status?uid=" + uid;
+}
+</script>
 </body>
 </html>
