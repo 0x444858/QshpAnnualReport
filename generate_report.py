@@ -254,14 +254,16 @@ def main():
     report['summary']['post_days'] = len(report['summary']['post_count_per_day'])
     # 添加年
     report['year'] = config.year
+    with open(f'data/user/{uid}/task.json', 'r', encoding='utf-8') as f:
+        task = json.load(f)
+    # 写入元信息
+    report['task'] = task
 
     # 写入文件
     with open(f'data/user/{uid}/report.json', 'w', encoding='utf-8') as f:
         # json.dump(report, f, ensure_ascii=False, separators=(',', ':'))
         json.dump(report, f, ensure_ascii=False, indent=4)
     # 更新task文件
-    with open(f'data/user/{uid}/task.json', 'r', encoding='utf-8') as f:
-        task = json.load(f)
     task['generate_report'] = int(time.time())
     with open(f'data/user/{uid}/task.json', 'w', encoding='utf-8') as f:
         json.dump(task, f, ensure_ascii=False, separators=(',', ':'))
