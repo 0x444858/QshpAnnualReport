@@ -1,6 +1,7 @@
 #root {
     text-align: center;
-    background-color: #71abff;
+    background-color:#d2e2fd;
+    padding: 0 0 200px 0;
 }
 
 img {
@@ -29,4 +30,43 @@ img {
     padding: 10px;
     margin: 50px;
     color: white;
+}
+
+.button_small {
+    height: 30px;
+    width: auto;
+    font-size: 14px;
+    padding: 5px;
+    margin: 20px;
+}
+
+span {
+    margin: 0 5px;
+}
+
+a {
+    margin: 0 5px;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.no_sep {
+    margin: 0;
+}
+
+#green_wall {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 0;
+}
+
+#green_wall svg {
+  display: block;
+  min-width: 100%;
 }

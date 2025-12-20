@@ -85,6 +85,13 @@ def main():
     report['summary']['thread'] = row[0] or 0
     report['summary']['reply'] = row[1] or 0
     report['summary']['all'] = report['summary']['thread'] + report['summary']['reply']
+    # 抢到的沙发数
+    cursor.execute("""
+         SELECT 
+             SUM(CASE WHEN position = 2 THEN 1 ELSE 0 END) AS sofa
+         FROM posts
+    """)
+    report['summary']['sofa_count'] = cursor.fetchone()[0]
     # 最早的主题帖
     cursor.execute("""
             SELECT position, dateline, tid, pid, subject, message

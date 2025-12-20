@@ -20,6 +20,11 @@ def user_status():
     return app.send_static_file('user_status.html')
 
 
+@app.route('/AnnualReport/report')
+def report():
+    return app.send_static_file('report.html')
+
+
 @app.route('/AnnualReport/api/user_status')
 def user_status_api():
     uid = request.args.get('uid')

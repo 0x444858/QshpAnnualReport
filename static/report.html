@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>清水河畔2025年度报告</title>
+    <link rel="stylesheet" href="/AnnualReport/static/style.css">
+    <link rel="stylesheet" href="/AnnualReport/static/mobile.css" media="(max-width: 599px)">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+<body>
+<div id="root">
+    <div id="logo_div">
+        <img src="/AnnualReport/static/qshp-logo-outlined.png" style="margin: 40px auto" alt="logo">
+    </div>
+    <div id="main_div">
+        <div id="search_report">
+            <h1>正在查找您的报告</h1>
+            <img src="/AnnualReport/static/loading.gif" alt="loading">
+        </div>
+        <div id="report_main" style="display: none">
+            <div id="report_hello">
+                <h1>成电人，玩河畔</h1>
+                <br>
+                <h1>~ 您的河畔年度报告已生成 ~</h1>
+                <img src="/AnnualReport/static/logo-big.png" style="margin: 40px auto" alt="logo">
+                <br>
+                <img src="/AnnualReport/static/hrline1.gif" alt="line">
+            </div>
+            <div id="report_mate">
+                <p>本报告申请提交时间：<span id="report_apply_time"></span></p>
+                <p>数据获取开始于：<span id="get_data_start"></span></p>
+                <p>数据获取结束于：<span id="get_data_stop"></span></p>
+                <p>数据获取耗时：<span id="get_data_time"></span>秒</p>
+                <p>访问了您发表或回复过的<span id="meta_tid_count"></span>个主题帖。</p>
+                <p>本报告生成时间：<span id="report_generate_time"></span></p>
+            </div>
+            <img src="/AnnualReport/static/hrline1.gif" alt="line">
+            <div id="report_user">
+                <h3 id="username"></h3>
+                <p style="color: gray">(UID : <span id="uid"></span>)</p>
+                <p><span id="group_title"></span><span id="group_subtitle" style="color:gray"></span></p>
+                <p>今天是您在河畔的第<span id="days_from_register"></span>天。</p>
+            </div>
+            <img src="/AnnualReport/static/hrline1.gif" alt="line">
+            <div id="report_summary">
+                <p>2025年，您累计发表了<span id="summary_thread"></span>个主题帖，
+                    <span id="summary_reply"></span>条回复，</p>
+                <p>合计<span id="summary_all"></span>条帖子。</p>
+                <p>今年您一共抢到<span id="sofa_count"></span>次沙发</p>
+                <p>在2025年的365天中，您有<span id="summary_post_days"></span>天坚持发帖
+                    <span id="summary_reward_message" class="no_sep" style="display:none">，荣获
+                    <span id="summary_reward" style="color:#daa520"></span></span>。
+                </p>
+                <p><span id="post_most_days"></span>，是您发帖最多的日子，发表了<span id="summary_post_days_max"></span>帖。
+                </p>
+                <p>希望在2026年，您能够更加热爱河畔。</p>
+                <br>
+                <div id="green_wall"></div>
+                <button id="download_green_wall" class="button_common button_small">点击下载此热力图</button>
+            </div>
+            <img src="/AnnualReport/static/hrline1.gif" alt="line">
+            <div id="report_first_and_last">
+                <p>2025年，您发表的</p>
+                <p>第一个主题帖是<a id="first_thread_link"></a></p>
+                <p>最后一个主题帖是<a id="last_thread_link"></a></p>
+                <p>第一个回复是在<a id="first_reply_thread_link"></a>里的第<a id="first_reply_number"></a>楼</p>
+                <p>最后一个回复是在<a id="last_reply_thread_link"></a>里的第<a id="last_reply_number"></a>楼</p>
+            </div>
+            <img src="/AnnualReport/static/hrline1.gif" alt="line">
+            <div id="report_support_and_oppose">
+                <p>2025年，您发表的帖子总计被点赞<span id="total_support"></span>次，被点踩<span id="total_oppose"></span>次。
+                </p>
+                <p>其中：</p>
+                <p>被点赞最多的主题帖是<span id="thread_most_support_link_area"></span>，
+                    被赞<span id="thread_most_support_count"></span>次</p>
+                <p>被点踩最多的主题帖是<span id="thread_most_oppose_link_area"></span>，
+                    被踩<span id="thread_most_oppose_count"></span>次</p>
+                <p>被点赞最多的回复是<span id="reply_most_support_link_area"></span>，
+                    被赞<span id="reply_most_support_count"></span>次</p>
+                <p>被点踩最多的回复是<span id="reply_most_oppose_link_area"></span>，
+                    被踩<span id="reply_most_oppose_count"></span>次</p>
+            </div>
+            <img src="/AnnualReport/static/hrline1.gif" alt="line">
+            <div id="report_popularity">
+                <p>2025年，您</p>
+                <p>回复最多的帖子是<span id="reply_thread_most_link_area"></span>，
+                    回复了<span id="reply_thread_most_count"></span>次
+                </p>
+                <p>发表的帖子中，回复最多的是<span id="thread_replies_most_link_area"></span>，
+                    有<span id="thread_replies_most_count"></span>条回复
+                </p>
+                <p>发表的帖子中，浏览量最多的是<span id="thread_views_most_link_area"></span>，
+                    有<span id="thread_views_most_count"></span>次查看
+                </p>
+                <p>发表的帖子中，收藏最多的是<span id="thread_favorite_most_link_area"></span>，
+                    有<span id="thread_favorite_most_count"></span>个收藏
+                </p>
+            </div>
+            <img src="/AnnualReport/static/hrline1.gif" alt="line">
+            <div id="report_personal_favorite">
+                <p>2025年，您</p>
+                <p>发帖最多的板块是<span id="forum_most_favorite_link_area"></span>，
+                    您在此板块发表了<span id="forum_most_favorite_count"></span>个帖子
+                </p>
+                <p>回复最多的人是<span id="reply_user_most_link_area"></span>，
+                    您回复了ta<span id="reply_user_most_count"></span>次
+                </p>
+            </div>
+            <img src="/AnnualReport/static/hrline1.gif" alt="line">
+            <div id="report_rank">
+                <p>以下是您在2025年各项数据的排行榜</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/AnnualReport/static/report.js" defer></script>
+</body>
+</html>
