@@ -252,6 +252,20 @@ def main():
     report['summary']['post_count_per_day'] = get_yearly_post_counts(db_conn, config.year)
     # 发帖天数
     report['summary']['post_days'] = len(report['summary']['post_count_per_day'])
+    # 发帖量排行
+    report['rank']['post_count_per_days'] = [
+        {"d": date, "c": count}
+        for date, count in
+        sorted(report['summary']['post_count_per_day'].items(), key=lambda x: x[1], reverse=True)[:20]
+    ]
+    # 发帖最多的日期
+    post_max_count = max(report['summary']['post_count_per_day'].values())
+    report['summary']['post_most_days'] = [
+        {"d": date, "c": count}
+        for date, count in report['summary']['post_count_per_day'].items()
+        if count == post_max_count
+    ]
+    report['summary']['post_most_days'].sort(key=lambda x: x["d"])
     # 添加年
     report['year'] = config.year
     with open(f'data/user/{uid}/task.json', 'r', encoding='utf-8') as f:
