@@ -333,7 +333,7 @@ def main():
 if __name__ == '__main__':
     max_workers_thread = 10
     max_workers_reply = 10
-    max_workers_position = 30
+    max_workers_position = 10
     max_workers_posts = 10
     target_year = config.year
     tz_utc8 = datetime.timezone(datetime.timedelta(hours=8))
