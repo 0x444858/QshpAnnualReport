@@ -70,3 +70,43 @@ a:hover {
   display: block;
   min-width: 100%;
 }
+
+.centered_table {
+  margin: 0 auto;
+  max-width: 800px;
+  width: fit-content;
+  border-collapse: collapse;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary_text {
+    background-color: #2174f1;
+    height: 30px;
+    width: auto;
+    text-align: center;
+    line-height: 100%;
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 5px;
+    margin: 20px;
+    color: white;
+}
+
+summary {
+    padding: 20px;
+}
+
+.table_container {
+    margin: 10px;
+    padding: 10px;
+}
+
+th {
+    padding: 20px;
+}

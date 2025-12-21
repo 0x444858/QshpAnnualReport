@@ -83,7 +83,7 @@
             <img src="/AnnualReport/static/hrline1.gif" alt="line">
             <div id="report_popularity">
                 <p>2025年，您</p>
-                <p>回复最多的帖子是<span id="reply_thread_most_link_area"></span>，
+                <p>回复最多的主题帖是<span id="reply_thread_most_link_area"></span>，
                     回复了<span id="reply_thread_most_count"></span>次
                 </p>
                 <p>发表的帖子中，回复最多的是<span id="thread_replies_most_link_area"></span>，
@@ -99,8 +99,8 @@
             <img src="/AnnualReport/static/hrline1.gif" alt="line">
             <div id="report_personal_favorite">
                 <p>2025年，您</p>
-                <p>发帖最多的板块是<span id="forum_most_favorite_link_area"></span>，
-                    您在此板块发表了<span id="forum_most_favorite_count"></span>个帖子
+                <p>发帖最多的版块是<span id="forum_most_favorite_link_area"></span>，
+                    您在此版块发表了<span id="forum_most_favorite_count"></span>个帖子
                 </p>
                 <p>回复最多的人是<span id="reply_user_most_link_area"></span>，
                     您回复了ta<span id="reply_user_most_count"></span>次
@@ -109,6 +109,188 @@
             <img src="/AnnualReport/static/hrline1.gif" alt="line">
             <div id="report_rank">
                 <p>以下是您在2025年各项数据的排行榜</p>
+                <details>
+                    <summary><span class="summary_text">发表的主题帖点赞量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>发表时间</th>
+                                <th>标题</th>
+                                <th>点赞数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="thread_support_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">发表的主题帖点踩量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>发表时间</th>
+                                <th>标题</th>
+                                <th>点赞数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="thread_oppose_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">发表的回复点赞量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>发表时间</th>
+                                <th>所在主题帖</th>
+                                <th>楼层</th>
+                                <th>点赞数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="reply_support_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">发表的回复点踩量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>发表时间</th>
+                                <th>所在主题帖</th>
+                                <th>楼层</th>
+                                <th>点赞数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="reply_oppose_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">对主题帖发表回复的数量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>标题</th>
+                                <th>回复数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="reply_thread_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">发表的主题帖回复数排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>标题</th>
+                                <th>回复数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="thread_replies_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">发表的主题帖浏览量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>标题</th>
+                                <th>浏览量</th>
+                            </tr>
+                            </thead>
+                            <tbody id="thread_views_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">发表的主题帖收藏量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>标题</th>
+                                <th>收藏数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="thread_favorite_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">版块发帖量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>版块</th>
+                                <th>发帖数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="forum_post_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">您回复其他用户的帖子数量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>用户名</th>
+                                <th>回复数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="reply_user_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <details>
+                    <summary><span class="summary_text">您每天发帖量量排行</span></summary>
+                    <div class="table_container">
+                        <table class="centered_table">
+                            <thead>
+                            <tr>
+                                <th>排名</th>
+                                <th>日期</th>
+                                <th>回复数</th>
+                            </tr>
+                            </thead>
+                            <tbody id="post_count_per_days_rank">
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
             </div>
         </div>
     </div>

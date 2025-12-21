@@ -246,7 +246,7 @@ function get_post_link(pid){
 }
 
 function get_user_link(username){
-    return `https:\/\/bbs.uestc.edu.cn/user/name/${username}`;
+    return `https:\/\/bbs.uestc.edu.cn/user/name/${encodeURIComponent(username)}`;
 }
 
 function get_forum_link(fid){
@@ -504,6 +504,155 @@ function generate_report(data){
     }
     s('reply_user_most_count', personal_favorite.reply_user_most[0][1]);
     // 排行榜
+    let thread_support_rank = document.getElementById('thread_support_rank');
+    if (thread_support_rank) {
+        list = rank.thread_support;
+        for (let i = 0; i < list.length; i++) {
+            const newRow = thread_support_rank.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            cell1.textContent = i + 1;
+            const cell2 = newRow.insertCell(1);
+            cell2.textContent = new Date(list[i][4] * 1000).toLocaleString();
+            const cell3 = newRow.insertCell(2);
+            const a = document.createElement('a');
+            a.href = get_thread_link(list[i][0]);
+            a.textContent = list[i][2];
+            cell3.appendChild(a);
+            const cell4 = newRow.insertCell(3);
+            cell4.textContent = list[i][5];
+        }
+    }
+    let thread_oppose_rank = document.getElementById('thread_oppose_rank');
+    if (thread_oppose_rank) {
+        list = rank.thread_oppose;
+        for (let i = 0; i < list.length; i++) {
+            const newRow = thread_oppose_rank.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            cell1.textContent = i + 1;
+            const cell2 = newRow.insertCell(1);
+            cell2.textContent = new Date(list[i][4] * 1000).toLocaleString();
+            const cell3 = newRow.insertCell(2);
+            const a = document.createElement('a');
+            a.href = get_thread_link(list[i][0]);
+            a.textContent = list[i][2];
+            cell3.appendChild(a);
+            const cell4 = newRow.insertCell(3);
+            cell4.textContent = list[i][5];
+        }
+    }
+    let reply_support_rank = document.getElementById('reply_support_rank');
+    if (reply_support_rank) {
+        list = rank.reply_support;
+        for (let i = 0; i < list.length; i++) {
+            const newRow = reply_support_rank.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            cell1.textContent = i + 1;
+            const cell2 = newRow.insertCell(1);
+            cell2.textContent = new Date(list[i][5] * 1000).toLocaleString();
+            const cell3 = newRow.insertCell(2);
+            let a = document.createElement('a');
+            a.href = get_thread_link(list[i][0]);
+            a.textContent = list[i][3];
+            cell3.appendChild(a);
+            const cell4 = newRow.insertCell(3);
+            a = document.createElement('a');
+            a.href = get_post_link(list[i][1]);
+            a.textContent = list[i][2];
+            cell4.appendChild(a);
+            const cell5 = newRow.insertCell(4);
+            cell5.textContent = list[i][6];
+        }
+    }
+    let reply_oppose_rank = document.getElementById('reply_oppose_rank');
+    if (reply_oppose_rank) {
+        list = rank.reply_oppose;
+        for (let i = 0; i < list.length; i++) {
+            const newRow = reply_oppose_rank.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            cell1.textContent = i + 1;
+            const cell2 = newRow.insertCell(1);
+            cell2.textContent = new Date(list[i][5] * 1000).toLocaleString();
+            const cell3 = newRow.insertCell(2);
+            let a = document.createElement('a');
+            a.href = get_thread_link(list[i][0]);
+            a.textContent = list[i][3];
+            cell3.appendChild(a);
+            const cell4 = newRow.insertCell(3);
+            a = document.createElement('a');
+            a.href = get_post_link(list[i][1]);
+            a.textContent = list[i][2];
+            cell4.appendChild(a);
+            const cell5 = newRow.insertCell(4);
+            cell5.textContent = list[i][6];
+        }
+    }
+    function create_simple_rank(tbody_id, list, link_generate_func){
+        const tbody = document.getElementById(tbody_id);
+        if (tbody) {
+            for (let i = 0; i < list.length; i++) {
+                const newRow = tbody.insertRow(-1);
+                const cell1 = newRow.insertCell(0);
+                cell1.textContent = i + 1;
+                const cell2 = newRow.insertCell(1);
+                const a = document.createElement('a');
+                a.href = link_generate_func(list[i][0]);
+                a.textContent = list[i][1];
+                cell2.appendChild(a);
+                const cell3 = newRow.insertCell(2);
+                cell3.textContent = list[i][2];
+            }
+        }
+    }
+
+    create_simple_rank('reply_thread_rank', rank.reply_thread, get_thread_link);
+    create_simple_rank('thread_replies_rank', rank.thread_replies, get_thread_link);
+    create_simple_rank('thread_views_rank', rank.thread_views, get_thread_link);
+    create_simple_rank('thread_favorite_rank', rank.thread_favorite, get_thread_link);
+    const forum_post_rank = document.getElementById('forum_post_rank');
+    if (forum_post_rank){
+        list = rank.forum_post;
+        for (let i = 0; i < list.length; i++) {
+            const newRow = forum_post_rank.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            cell1.textContent = i + 1;
+            const cell2 = newRow.insertCell(1);
+            const a = document.createElement('a');
+            a.href = get_forum_link(list[i][0]);
+            a.textContent = list[i][2];
+            cell2.appendChild(a);
+            const cell3 = newRow.insertCell(2);
+            cell3.textContent = list[i][1];
+        }
+    }
+    const reply_user_rank = document.getElementById('reply_user_rank');
+    if (reply_user_rank){
+        list = rank.reply_user;
+        for (let i = 0; i < list.length; i++) {
+            const newRow = reply_user_rank.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            cell1.textContent = i + 1;
+            const cell2 = newRow.insertCell(1);
+            const a = document.createElement('a');
+            a.href = get_user_link(list[i][0]);
+            a.textContent = list[i][0];
+            cell2.appendChild(a);
+            const cell3 = newRow.insertCell(2);
+            cell3.textContent = list[i][1];
+        }
+    }
+    const post_count_per_days_rank = document.getElementById('post_count_per_days_rank');
+    if (post_count_per_days_rank){
+        list = rank.post_count_per_days;
+        for (let i = 0; i < list.length; i++) {
+            const newRow = post_count_per_days_rank.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            cell1.textContent = i + 1;
+            const cell2 = newRow.insertCell(1);
+            cell2.textContent = list[i].d;
+            const cell3 = newRow.insertCell(2);
+            cell3.textContent = list[i].c;
+        }
+    }
 
 
     // 将数据设为可见
