@@ -1,5 +1,10 @@
 # 清水河畔年度报告生成
 
+在线使用：[获取您的清水河畔2025年度报告](https://qshp.range6.link/AnnualReport/)
+
+> [!NOTE]  
+> 在线域名被`Microsoft Smart Screen`误报，建议使用chrome等其他浏览器。
+
 ## 功能
 
 生成指定清水河畔用户的年度报告，包含如下项目：
@@ -65,16 +70,7 @@ year = 2025
 
 ### 自用
 
-在`data/queue/`中，新建一个以纯数字命名的文件，包含以下内容。
-
-```json
-{
-    "uid": 287813,
-    "create_time": 1766219800
-}
-```
-
-只有uid是必须的，填入目标uid即可。
+执行`add_task.py uid1 uid2 ...`添加任务。
 
 然后运行`main.py`，如果一切正确，会有如下日志：
 
@@ -95,4 +91,19 @@ year = 2025
 
 运行`main.py`和`web.py`，配置好nginx。
 
-打开 `http://your.domain/AnnualReport` ，根据指引操作。
+支持通过自助的方式来添加计划任务，只是此功能未有前端入口。
+
+如需启用，请在`user_status.html`的`apply_div`中进行引导并给出确认按钮以发送数据包。
+
+1. 向爬虫账号私信任意内容。你也可以要求用户私信指定内容。
+
+2. 向`/AnnualReport/api/new_task` `POST`如下格式的数据包来添加任务：
+
+    ```json
+    {
+        "uid": 111,
+        "auth": "刚刚私信的内容"
+    }
+    ```
+
+你也随时可以收到通过`add_task.py`添加任务。
