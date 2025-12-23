@@ -274,6 +274,12 @@ def new_task_api():
     })
 
 
+@app.route('/AnnualReport/api/get_user_total/')
+def get_user_total_api():
+    user_count = len([f for f in os.listdir('data/user') if os.path.isdir(os.path.join('data/user', f))])
+    return jsonify({"year": config.year, "user_count": user_count})
+
+
 if __name__ == '__main__':
     m_api = mobcentAPI.MobcentAPI(config.username, config.password)
     app.run('127.0.0.1', 9595, debug=False)

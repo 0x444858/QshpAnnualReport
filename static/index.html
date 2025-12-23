@@ -17,9 +17,27 @@
         <input name="=uid" id="uid_input" class="input_common" placeholder="输入您的UID" type="number" min="1">
         <br>
         <button id="submit_button" class="button_common" onclick="submit()">确定</button>
+        <br>
+        <h3 id="user_total"></h3>
     </div>
 </div>
 <script>
+async function get_user_total() {
+    user_total = document.getElementById("user_total");
+    try {
+        const response = await fetch("/AnnualReport/api/get_user_total/");
+        if (response.ok) {
+            const data = await response.json();
+            year = data.year;
+            user_count = data.user_count;
+            if (user_total){
+                user_total.textContent = `已累计为 ${user_count} 位用户生成 ${year} 年度报告`;
+            }
+        }
+    } catch (error) {
+    }
+}
+get_user_total();
 function submit() {
     let uid = document.getElementById("uid_input").value;
     if (uid === "") {
