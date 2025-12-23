@@ -110,3 +110,12 @@ summary {
 th {
     padding: 20px;
 }
+
+.mobile_hint {
+    display: none;
+}
+
+.desktop_hint {
+    display: block;
+    margin: 10px;
+}

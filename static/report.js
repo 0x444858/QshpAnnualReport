@@ -269,6 +269,7 @@ function generate_report(data){
     l = set_link;
 
     // 填入数据
+    document.title = `${user.username} - 清水河畔2025年度报告`;
 
     // 元数据
     s('report_apply_time', new Date(task.create_time * 1000).toLocaleString());
@@ -308,21 +309,27 @@ function generate_report(data){
     s('summary_post_days_max', summary.post_most_days[0].c);
     const { downloadSVG } = renderGreenWall(year, summary.post_count_per_day);
     const download_btn = document.getElementById('download_green_wall');
-    download_btn.onclick = () => {downloadSVG(`清水河畔uid${user.uid}的2025年发帖热力图.svg`);};
+    download_btn.onclick = () => {downloadSVG(`${encodeURIComponent(user.username)}的河畔2025年发帖图.svg`);};
 
     // 第一个与最后一个
-    l('first_thread_link', first_and_last.first_thread[4], get_thread_link(first_and_last.first_thread[2]));
-    l('last_thread_link', first_and_last.last_thread[4], get_thread_link(first_and_last.last_thread[2]));
-    l('first_reply_thread_link', first_and_last.first_reply[4], get_thread_link(first_and_last.first_reply[2]));
-    l('first_reply_number', first_and_last.first_reply[0], get_post_link(first_and_last.first_reply[3]));
-    l('last_reply_thread_link', first_and_last.last_reply[4], get_thread_link(first_and_last.last_reply[2]));
-    l('last_reply_number', first_and_last.last_reply[0], get_post_link(first_and_last.last_reply[3]));
+    if (first_and_last.first_thread)
+        l('first_thread_link', first_and_last.first_thread[4], get_thread_link(first_and_last.first_thread[2]));
+    if (first_and_last.last_thread)
+        l('last_thread_link', first_and_last.last_thread[4], get_thread_link(first_and_last.last_thread[2]));
+    if (first_and_last.first_reply)
+        l('first_reply_thread_link', first_and_last.first_reply[4], get_thread_link(first_and_last.first_reply[2]));
+    if (first_and_last.first_reply)
+        l('first_reply_number', first_and_last.first_reply[0], get_post_link(first_and_last.first_reply[3]));
+    if (first_and_last.last_reply) {
+        l('last_reply_thread_link', first_and_last.last_reply[4], get_thread_link(first_and_last.last_reply[2]));
+        l('last_reply_number', first_and_last.last_reply[0], get_post_link(first_and_last.last_reply[3]));
+    }
 
     // 赞与踩
     s('total_support', support_and_oppose.total_support);
     s('total_oppose', support_and_oppose.total_oppose);
     const thread_most_support_link_area = document.getElementById('thread_most_support_link_area');
-    if (thread_most_support_link_area) {
+    if (thread_most_support_link_area && support_and_oppose.thread_most_support[0]) {
         list = support_and_oppose.thread_most_support;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -331,14 +338,14 @@ function generate_report(data){
             thread_most_support_link_area.appendChild(a);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
+                sep.textContent = '、';
                 thread_most_support_link_area.appendChild(sep);
             }
         }
+        s('thread_most_support_count', support_and_oppose.thread_most_support[0][5]);
     }
-    s('thread_most_support_count', support_and_oppose.thread_most_support[0][5]);
     const thread_most_oppose_link_area = document.getElementById('thread_most_oppose_link_area');
-    if (thread_most_oppose_link_area) {
+    if (thread_most_oppose_link_area && support_and_oppose.thread_most_oppose[0]) {
         list = support_and_oppose.thread_most_oppose;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -347,14 +354,14 @@ function generate_report(data){
             thread_most_oppose_link_area.appendChild(a);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
+                sep.textContent = '、';
                 thread_most_oppose_link_area.appendChild(sep);
             }
         }
+        s('thread_most_oppose_count', support_and_oppose.thread_most_oppose[0][5]);
     }
-    s('thread_most_oppose_count', support_and_oppose.thread_most_oppose[0][5]);
     const reply_most_support_link_area = document.getElementById('reply_most_support_link_area');
-    if (reply_most_support_link_area) {
+    if (reply_most_support_link_area && support_and_oppose.reply_most_support[0]) {
         list = support_and_oppose.reply_most_support;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -373,14 +380,14 @@ function generate_report(data){
             reply_most_support_link_area.appendChild(fl);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
+                sep.textContent = '、';
                 reply_most_support_link_area.appendChild(sep);
             }
         }
+        s('reply_most_support_count', support_and_oppose.reply_most_support[0][6]);
     }
-    s('reply_most_support_count', support_and_oppose.reply_most_support[0][6]);
     const reply_most_oppose_link_area = document.getElementById('reply_most_oppose_link_area');
-    if (reply_most_oppose_link_area) {
+    if (reply_most_oppose_link_area && support_and_oppose.reply_most_oppose[0]) {
         list = support_and_oppose.reply_most_oppose;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -399,14 +406,14 @@ function generate_report(data){
             reply_most_oppose_link_area.appendChild(fl);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
+                sep.textContent = '、';
                 reply_most_oppose_link_area.appendChild(sep);
             }
         }
+        s('reply_most_oppose_count', support_and_oppose.reply_most_oppose[0][6]);
     }
-    s('reply_most_oppose_count', support_and_oppose.reply_most_oppose[0][6]);
     let reply_thread_most_link_area = document.getElementById('reply_thread_most_link_area');
-    if (reply_thread_most_link_area) {
+    if (reply_thread_most_link_area && popularity.reply_thread_most[0]) {
         list = popularity.reply_thread_most;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -415,15 +422,15 @@ function generate_report(data){
             reply_thread_most_link_area.appendChild(a);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
+                sep.textContent = '、';
                 reply_thread_most_link_area.appendChild(sep);
             }
         }
+        s('reply_thread_most_count', popularity.reply_thread_most[0][2]);
     }
     // popularity
-    s('reply_thread_most_count', popularity.reply_thread_most[0][2]);
     let thread_replies_most_link_area = document.getElementById('thread_replies_most_link_area');
-    if (thread_replies_most_link_area) {
+    if (thread_replies_most_link_area && popularity.thread_replies_most[0]) {
         list = popularity.thread_replies_most;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -432,14 +439,14 @@ function generate_report(data){
             thread_replies_most_link_area.appendChild(a);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
+                sep.textContent = '、';
                 thread_replies_most_link_area.appendChild(sep);
             }
         }
+        s('thread_replies_most_count', popularity.thread_replies_most[0][2]);
     }
-    s('thread_replies_most_count', popularity.thread_replies_most[0][2]);
     let thread_views_most_link_area = document.getElementById('thread_views_most_link_area');
-    if (thread_views_most_link_area) {
+    if (thread_views_most_link_area && popularity.thread_views_most[0]) {
         list = popularity.thread_views_most;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -448,14 +455,14 @@ function generate_report(data){
             thread_views_most_link_area.appendChild(a);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
+                sep.textContent = '、';
                 thread_views_most_link_area.appendChild(sep);
             }
         }
+        s('thread_views_most_count', popularity.thread_views_most[0][2]);
     }
-    s('thread_views_most_count', popularity.thread_views_most[0][2]);
     let thread_favorite_most_link_area = document.getElementById('thread_favorite_most_link_area');
-    if (thread_favorite_most_link_area) {
+    if (thread_favorite_most_link_area && popularity.thread_favorite_most[0]) {
         list = popularity.thread_favorite_most;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -464,15 +471,15 @@ function generate_report(data){
             thread_favorite_most_link_area.appendChild(a);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
+                sep.textContent = '、';
                 thread_favorite_most_link_area.appendChild(sep);
             }
         }
+        s('thread_favorite_most_count', popularity.thread_favorite_most[0][2]);
     }
-    s('thread_favorite_most_count', popularity.thread_favorite_most[0][2]);
     // 个人喜好
     let forum_most_favorite_link_area = document.getElementById('forum_most_favorite_link_area');
-    if (forum_most_favorite_link_area) {
+    if (forum_most_favorite_link_area && personal_favorite.forum_most_favorite[0]) {
         list = personal_favorite.forum_most_favorite;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -481,14 +488,14 @@ function generate_report(data){
             forum_most_favorite_link_area.appendChild(a);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
-                thread_favorite_most_link_area.appendChild(sep);
+                sep.textContent = '、';
+                forum_most_favorite_link_area.appendChild(sep);
             }
         }
+        s('forum_most_favorite_count', personal_favorite.forum_most_favorite[0][1]);
     }
-    s('forum_most_favorite_count', personal_favorite.forum_most_favorite[0][1]);
     let reply_user_most_link_area = document.getElementById('reply_user_most_link_area');
-    if (reply_user_most_link_area) {
+    if (reply_user_most_link_area && personal_favorite.reply_user_most[0]) {
         list = personal_favorite.reply_user_most;
         for (let i = 0; i < list.length; i++) {
             let a = document.createElement('a');
@@ -497,15 +504,15 @@ function generate_report(data){
             reply_user_most_link_area.appendChild(a);
             if (i+1 < list.length) {
                 let sep = document.createElement('span');
-                sep.textContent = '，';
-                thread_favorite_most_link_area.appendChild(sep);
+                sep.textContent = '、';
+                reply_user_most_link_area.appendChild(sep);
             }
         }
+        s('reply_user_most_count', personal_favorite.reply_user_most[0][1]);
     }
-    s('reply_user_most_count', personal_favorite.reply_user_most[0][1]);
     // 排行榜
     let thread_support_rank = document.getElementById('thread_support_rank');
-    if (thread_support_rank) {
+    if (thread_support_rank && rank.thread_support[0]) {
         list = rank.thread_support;
         for (let i = 0; i < list.length; i++) {
             const newRow = thread_support_rank.insertRow(-1);
@@ -523,7 +530,7 @@ function generate_report(data){
         }
     }
     let thread_oppose_rank = document.getElementById('thread_oppose_rank');
-    if (thread_oppose_rank) {
+    if (thread_oppose_rank && rank.thread_oppose[0]) {
         list = rank.thread_oppose;
         for (let i = 0; i < list.length; i++) {
             const newRow = thread_oppose_rank.insertRow(-1);
@@ -541,7 +548,7 @@ function generate_report(data){
         }
     }
     let reply_support_rank = document.getElementById('reply_support_rank');
-    if (reply_support_rank) {
+    if (reply_support_rank && rank.reply_support[0]) {
         list = rank.reply_support;
         for (let i = 0; i < list.length; i++) {
             const newRow = reply_support_rank.insertRow(-1);
@@ -564,7 +571,7 @@ function generate_report(data){
         }
     }
     let reply_oppose_rank = document.getElementById('reply_oppose_rank');
-    if (reply_oppose_rank) {
+    if (reply_oppose_rank && rank.reply_oppose[0]) {
         list = rank.reply_oppose;
         for (let i = 0; i < list.length; i++) {
             const newRow = reply_oppose_rank.insertRow(-1);
@@ -588,7 +595,7 @@ function generate_report(data){
     }
     function create_simple_rank(tbody_id, list, link_generate_func){
         const tbody = document.getElementById(tbody_id);
-        if (tbody) {
+        if (tbody && list[0]) {
             for (let i = 0; i < list.length; i++) {
                 const newRow = tbody.insertRow(-1);
                 const cell1 = newRow.insertCell(0);
@@ -609,7 +616,7 @@ function generate_report(data){
     create_simple_rank('thread_views_rank', rank.thread_views, get_thread_link);
     create_simple_rank('thread_favorite_rank', rank.thread_favorite, get_thread_link);
     const forum_post_rank = document.getElementById('forum_post_rank');
-    if (forum_post_rank){
+    if (forum_post_rank && rank.forum_post[0]){
         list = rank.forum_post;
         for (let i = 0; i < list.length; i++) {
             const newRow = forum_post_rank.insertRow(-1);
@@ -625,7 +632,7 @@ function generate_report(data){
         }
     }
     const reply_user_rank = document.getElementById('reply_user_rank');
-    if (reply_user_rank){
+    if (reply_user_rank && rank.reply_user[0]){
         list = rank.reply_user;
         for (let i = 0; i < list.length; i++) {
             const newRow = reply_user_rank.insertRow(-1);
@@ -641,7 +648,7 @@ function generate_report(data){
         }
     }
     const post_count_per_days_rank = document.getElementById('post_count_per_days_rank');
-    if (post_count_per_days_rank){
+    if (post_count_per_days_rank && rank.post_count_per_days[0]){
         list = rank.post_count_per_days;
         for (let i = 0; i < list.length; i++) {
             const newRow = post_count_per_days_rank.insertRow(-1);
@@ -654,6 +661,10 @@ function generate_report(data){
         }
     }
 
+    // 将所有链接设为新标签打开
+    document.querySelectorAll('a').forEach(link => {
+        link.target="_blank";
+    })
 
     // 将数据设为可见
     let search_report_div = document.getElementById('search_report');

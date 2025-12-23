@@ -10,17 +10,17 @@ import shutil
 app = Flask(__name__, static_folder='static', static_url_path='/AnnualReport/static')
 
 
-@app.route('/AnnualReport')
+@app.route('/AnnualReport/')
 def index():
     return app.send_static_file('index.html')
 
 
-@app.route('/AnnualReport/user_status')
+@app.route('/AnnualReport/user_status/')
 def user_status():
     return app.send_static_file('user_status.html')
 
 
-@app.route('/AnnualReport/report')
+@app.route('/AnnualReport/report/')
 def report():
     return app.send_static_file('report.html')
 

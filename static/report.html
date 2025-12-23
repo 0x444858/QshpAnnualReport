@@ -56,7 +56,9 @@
                 <p>希望在2026年，您能够更加热爱河畔。</p>
                 <br>
                 <div id="green_wall"></div>
-                <button id="download_green_wall" class="button_common button_small">点击下载此热力图</button>
+                <div class="desktop_hint">鼠标悬停显示具体日期和数值</div>
+                <div class="mobile_hint">若设备宽度不够，可左右拖动查看</div>
+                <button id="download_green_wall" class="button_common button_small">点击下载此图</button>
             </div>
             <img src="/AnnualReport/static/hrline1.gif" alt="line">
             <div id="report_first_and_last">
@@ -68,47 +70,47 @@
             </div>
             <img src="/AnnualReport/static/hrline1.gif" alt="line">
             <div id="report_support_and_oppose">
-                <p>2025年，您发表的帖子总计被点赞<span id="total_support"></span>次，被点踩<span id="total_oppose"></span>次。
+                <p>2025年，您发表的帖子总计被点赞<span id="total_support">0</span>次，被点踩<span id="total_oppose">0</span>次。
                 </p>
                 <p>其中：</p>
                 <p>被点赞最多的主题帖是<span id="thread_most_support_link_area"></span>，
-                    被赞<span id="thread_most_support_count"></span>次</p>
+                    被赞<span id="thread_most_support_count">0</span>次</p>
                 <p>被点踩最多的主题帖是<span id="thread_most_oppose_link_area"></span>，
-                    被踩<span id="thread_most_oppose_count"></span>次</p>
+                    被踩<span id="thread_most_oppose_count">0</span>次</p>
                 <p>被点赞最多的回复是<span id="reply_most_support_link_area"></span>，
-                    被赞<span id="reply_most_support_count"></span>次</p>
+                    被赞<span id="reply_most_support_count">0</span>次</p>
                 <p>被点踩最多的回复是<span id="reply_most_oppose_link_area"></span>，
-                    被踩<span id="reply_most_oppose_count"></span>次</p>
+                    被踩<span id="reply_most_oppose_count">0</span>次</p>
             </div>
             <img src="/AnnualReport/static/hrline1.gif" alt="line">
             <div id="report_popularity">
                 <p>2025年，您</p>
                 <p>回复最多的主题帖是<span id="reply_thread_most_link_area"></span>，
-                    回复了<span id="reply_thread_most_count"></span>次
+                    回复了<span id="reply_thread_most_count">0</span>次
                 </p>
                 <p>发表的帖子中，回复最多的是<span id="thread_replies_most_link_area"></span>，
-                    有<span id="thread_replies_most_count"></span>条回复
+                    有<span id="thread_replies_most_count">0</span>条回复
                 </p>
                 <p>发表的帖子中，浏览量最多的是<span id="thread_views_most_link_area"></span>，
-                    有<span id="thread_views_most_count"></span>次查看
+                    有<span id="thread_views_most_count">0</span>次查看
                 </p>
                 <p>发表的帖子中，收藏最多的是<span id="thread_favorite_most_link_area"></span>，
-                    有<span id="thread_favorite_most_count"></span>个收藏
+                    有<span id="thread_favorite_most_count">0</span>个收藏
                 </p>
             </div>
             <img src="/AnnualReport/static/hrline1.gif" alt="line">
             <div id="report_personal_favorite">
                 <p>2025年，您</p>
                 <p>发帖最多的版块是<span id="forum_most_favorite_link_area"></span>，
-                    您在此版块发表了<span id="forum_most_favorite_count"></span>个帖子
+                    您在此版块发表了<span id="forum_most_favorite_count">0</span>个帖子
                 </p>
                 <p>回复最多的人是<span id="reply_user_most_link_area"></span>，
-                    您回复了ta<span id="reply_user_most_count"></span>次
+                    您回复了ta<span id="reply_user_most_count">0</span>次
                 </p>
             </div>
             <img src="/AnnualReport/static/hrline1.gif" alt="line">
             <div id="report_rank">
-                <p>以下是您在2025年各项数据的排行榜</p>
+                <p>以下是您在2025年各项数据的排行榜，点击即可查看</p>
                 <details>
                     <summary><span class="summary_text">发表的主题帖点赞量排行</span></summary>
                     <div class="table_container">
@@ -135,7 +137,7 @@
                                 <th>排名</th>
                                 <th>发表时间</th>
                                 <th>标题</th>
-                                <th>点赞数</th>
+                                <th>点踩数</th>
                             </tr>
                             </thead>
                             <tbody id="thread_oppose_rank">
@@ -171,7 +173,7 @@
                                 <th>发表时间</th>
                                 <th>所在主题帖</th>
                                 <th>楼层</th>
-                                <th>点赞数</th>
+                                <th>点踩数</th>
                             </tr>
                             </thead>
                             <tbody id="reply_oppose_rank">
@@ -276,14 +278,14 @@
                     </div>
                 </details>
                 <details>
-                    <summary><span class="summary_text">您每天发帖量量排行</span></summary>
+                    <summary><span class="summary_text">您每天发帖量排行</span></summary>
                     <div class="table_container">
                         <table class="centered_table">
                             <thead>
                             <tr>
                                 <th>排名</th>
                                 <th>日期</th>
-                                <th>回复数</th>
+                                <th>发帖数</th>
                             </tr>
                             </thead>
                             <tbody id="post_count_per_days_rank">
@@ -292,6 +294,11 @@
                     </div>
                 </details>
             </div>
+        </div>
+        <div>
+            <br>
+            <br>
+            <button onclick="window.location.href='/AnnualReport/'" class="button_common">回到首页</button>
         </div>
     </div>
 </div>

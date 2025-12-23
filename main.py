@@ -9,6 +9,7 @@ import json
 from collections import defaultdict
 from typing import Dict, List, Tuple
 import datetime
+import sys
 
 
 def fetch_valid_thread_tids_in_pages(uid: int, page_start: int, page_end: int):
@@ -301,12 +302,21 @@ def _fetch_tid_page_posts(tid: int, page: int, positions: List[int]) -> List[dic
 
 
 def main():
+    need_restart = False
     while True:
         task = util.get_next_task()
         if task is None:
             print(f'[{time.asctime()}] 无事', end='\r')
-            time.sleep(60)
+            need_restart = True
+            time.sleep(15)
             continue
+        if need_restart:
+            filename = f'data/queue/{task["uid"]}'
+            with open(filename, 'w')as f:
+                json.dump(task, f, ensure_ascii=False, separators=(',', ':'))
+            os.utime(filename, (1, 1))
+            print(f"[{time.asctime()}] Restarting...")
+            os.execv(sys.executable, [sys.executable] + sys.argv)
         uid = task['uid']
         print(f'[{time.asctime()}] 开始处理uid: {uid}')
         task['get_data_start'] = int(time.time())
@@ -326,8 +336,8 @@ def main():
         task |= global_info
         print(f'[{time.asctime()}] 完成uid: {uid}')
         util.save_task_metadata(uid, task)
-        os.system(f'python generate_report.py {uid}')
-        print(f'[{time.asctime()}] 报告生成完成: {uid}')
+        os.system(f'python3 generate_report.py {uid}')
+        print(f'[{time.asctime()}] \033[32;1m报告生成完成: {uid}\033[m')
 
 
 if __name__ == '__main__':

@@ -19,7 +19,7 @@ class WebAPI:
     api_pre = f'{pre}_/'
     auto_relog = 3600
     auto_update_auth = 3600
-    timeout = 5
+    timeout = 20
 
     def __init__(self, username: str, password: str, loginField='username', autoLogin: bool = True):
         if not username or not password:

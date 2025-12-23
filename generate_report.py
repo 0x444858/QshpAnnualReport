@@ -278,6 +278,7 @@ def main():
     with open(f'data/user/{uid}/task.json', 'r', encoding='utf-8') as f:
         task = json.load(f)
     # 写入元信息
+    task['generate_report'] = int(time.time())
     report['task'] = task
 
     # 写入文件
@@ -285,7 +286,7 @@ def main():
         # json.dump(report, f, ensure_ascii=False, separators=(',', ':'))
         json.dump(report, f, ensure_ascii=False, indent=4)
     # 更新task文件
-    task['generate_report'] = int(time.time())
+
     with open(f'data/user/{uid}/task.json', 'w', encoding='utf-8') as f:
         json.dump(task, f, ensure_ascii=False, separators=(',', ':'))
 
